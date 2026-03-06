@@ -1,13 +1,22 @@
 package pl.zagola.bakery;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
-public class Employee extends Person{
-    private LocalDate employmentDate;
+class Employee {
+    private PersonDetails details;
+    private Instant hireDate;
 
 
-    protected Employee(String firstName, String lastName, GeographicAddress address, LocalDate employmentDate) {
-        super(firstName, lastName);
-        this.employmentDate = employmentDate;
+    protected Employee(PersonDetails details, Instant employmentDate) {
+        this.details = details;
+        this.hireDate = employmentDate;
+    }
+
+    public Instant getHireDate() {
+        return hireDate;
+    }
+
+    public PersonDetails getDetails() {
+        return details;
     }
 }
