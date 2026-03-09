@@ -3,18 +3,13 @@ package pl.zagola.bakery;
 public class BakeryProduct {
     private String name;
     private double price;
-    private String customizations;
-    private int stockQuantity;
-    private String wholesalerOrder;
-    private String merchandising;
-    private Integer productId;
+    private int id;
+
 
     public BakeryProduct(String name, double price, int stockQuantity, String customizations, Integer productId) {
         this.name = name;
         this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.customizations = customizations;
-        this.productId = productId;
+        this.id = id;
     }
 
     public String getName() {
@@ -25,7 +20,9 @@ public class BakeryProduct {
         return price;
     }
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
 }
+
+//  private String customizations;
+//    private int stockQuantity;
+//    private String wholesalerOrder;
+//    private String merchandising;
