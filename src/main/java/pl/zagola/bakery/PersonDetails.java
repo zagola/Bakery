@@ -17,4 +17,9 @@ class PersonDetails {
     public String getFirstName() {
         return firstName;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }
