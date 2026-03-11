@@ -4,14 +4,17 @@ import java.util.List;
 
 public interface PersonDetailsRepository {
 
-    boolean addPerson(String firstName, String lastName);
+    boolean addPerson(Long id, String firstName, String lastName);
 
     List<PersonDetails> findAll();
 
-    PersonDetails findByLastName(String name);
+    List<PersonDetails> findByLastName(String lastName);
 
-    boolean updateLastName(PersonDetails personDetails);
+    List<PersonDetails> findById(Long id);
 
-    boolean delete(PersonDetails personDetails);
+    boolean updateLastName(Long id, String newLastName);
+
+
+    boolean deletePerson(PersonDetails personDetails);
 
 }

@@ -2,35 +2,54 @@ package pl.zagola.bakery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonDetailsRepositoryListBased implements PersonDetailsRepository {
+    private PersonDetails personDetails;
     private List<PersonDetails> personDetailsList = new ArrayList<>();
 
     @Override
-    public boolean addPerson(String firstName, String lastName) {
+    public boolean addPerson(Long id, String firstName, String lastName) {
         return personDetailsList.add(
-                new PersonDetails(firstName, lastName)
+                new PersonDetails(id, firstName, lastName)
         );
-
     }
 
     @Override
     public List<PersonDetails> findAll() {
-        return personDetailsList;
+        return new ArrayList<>(personDetailsList);
     }
 
     @Override
-    public PersonDetails findByLastName(String name) {
-        return null;
+    public List<PersonDetails> findById(Long id) {
+        return personDetailsList.stream()
+                .filter(p -> p != null && p.getId() != null && id.equals(p.getId()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean updateLastName(PersonDetails personDetails) {
-        return false;
+    public List<PersonDetails> findByLastName(String lastName) {
+        return personDetailsList.stream()
+                .filter(p -> lastName.equals(p.getLastName()))
+                .collect(Collectors.toList());
     }
 
+
     @Override
-    public boolean delete(PersonDetails personDetails) {
+    public boolean updateLastName(Long id, String newLastName) {
+        return personDetailsList.stream()
+                .filter(p -> p != null && p.getId() != null && id.equals(p.getId()))
+                .findFirst()
+                .map(p -> {
+                    p.setLastName(newLastName);
+                    return true;
+                })
+                .orElse(false);
+    }
+
+
+    @Override
+    public boolean deletePerson(PersonDetails personDetails) {
         return false;
     }
 
