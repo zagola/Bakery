@@ -34,7 +34,6 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public boolean updateLastName(Long id, String newLastName) {
         return personDetailsList.stream()
@@ -47,10 +46,10 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
                 .orElse(false);
     }
 
-
     @Override
-    public boolean deletePerson(PersonDetails personDetails) {
-        return false;
+    public boolean deletePerson(Long id, String firstName, String lastName) {
+        return personDetailsList.removeIf(p -> p != null && p.getId() != null
+                && id.equals(p.getId()));
     }
 
 }

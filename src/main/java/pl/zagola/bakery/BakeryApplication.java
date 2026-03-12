@@ -27,10 +27,8 @@ public class BakeryApplication {
         List<PersonDetails> personDetailsRepositoryAll = personDetailsRepository.findAll();
         System.out.println(personDetailsRepositoryAll);
 
-
         List<PersonDetails> personDetailsListFindByLastName = personDetailsRepository.findByLastName("Kowalski");
         System.out.println(personDetailsListFindByLastName);
-
 
         List<PersonDetails> personToUpdate = personDetailsRepository.findById(5L);
         System.out.println("Przed zmianą: " + personToUpdate);
@@ -39,6 +37,10 @@ public class BakeryApplication {
         System.out.println("Zaktualizowano: " + updatedPerson);
         System.out.println("Po: " + personDetailsRepository.findById(5L));
         System.out.println(personDetailsRepositoryAll);
+
+        boolean deletePerson = personDetailsRepository.deletePerson(1L, "Ola", "Zagrabska");
+        System.out.println("Usunięto: " + deletePerson);
+        System.out.println(personDetailsRepository.findAll());
     }
 
 }
