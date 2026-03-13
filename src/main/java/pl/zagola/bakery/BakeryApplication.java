@@ -41,6 +41,13 @@ public class BakeryApplication {
         boolean deletePerson = personDetailsRepository.deletePerson(1L, "Ola", "Zagrabska");
         System.out.println("Usunięto: " + deletePerson);
         System.out.println(personDetailsRepository.findAll());
+
+        HireDateRepository hireRepo = new HireDateRepositoryListBased();
+        boolean hireDateAdd = hireRepo.addHireDate(1L, Instant.now());
+
+        System.out.println("Dodano datę zatrudnienia: " + hireDateAdd);
+        System.out.println(hireRepo.findAll());
+
     }
 
 }
