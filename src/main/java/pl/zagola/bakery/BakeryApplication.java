@@ -12,11 +12,6 @@ public class BakeryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BakeryApplication.class, args);
-        PersonDetails detailsEmployeeJan = new PersonDetails(10000L, "Jan", "Zieliński");
-        Employee jan = new Employee(detailsEmployeeJan, Instant.now());
-
-        PersonDetails detailsClientKarol = new PersonDetails(11111L, "Karol", "Nowak");
-        Client karol = new Client(detailsClientKarol, new GeographicAddress(30.0, 24.5), 1);
 
         PersonDetailsRepository personDetailsRepository = new PersonDetailsRepositoryListBased();
         personDetailsRepository.addPerson(1L, "Ola", "Zagrabska");
@@ -47,6 +42,11 @@ public class BakeryApplication {
 
         System.out.println("Dodano datę zatrudnienia: " + hireDateAdd);
         System.out.println(hireRepo.findAll());
+
+        AddressRepository addrRepo = new AddressRepositoryListBased();
+        boolean addrAdd = addrRepo.addAddress(1L, 54.0, 18.0);
+        System.out.println("Dodano nowy adres: " + addrAdd);
+        System.out.println(addrRepo.findAll());
 
     }
 
