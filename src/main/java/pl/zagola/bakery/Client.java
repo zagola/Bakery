@@ -2,16 +2,16 @@ package pl.zagola.bakery;
 
 class Client {
     private PersonDetails details;
-    private GeographicAddress address;
+    private Address address;
     private Integer clientId;
 
-    protected Client(PersonDetails details, GeographicAddress address, Integer clientId) {
+    protected Client(PersonDetails details, Address address, Integer clientId) {
         this.details = details;
         this.address = address;
         this.clientId = clientId;
     }
 
-    public GeographicAddress getAddress() {
+    public Address getAddress() {
         return address;
     }
 
