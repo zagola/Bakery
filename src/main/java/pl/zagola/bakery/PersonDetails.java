@@ -5,7 +5,6 @@ class PersonDetails {
     private String firstName;
     private String lastName;
 
-
     PersonDetails(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;

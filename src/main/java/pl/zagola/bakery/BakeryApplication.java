@@ -3,50 +3,76 @@ package pl.zagola.bakery;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class BakeryApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BakeryApplication.class, args);
+        //SpringApplication.run(BakeryApplication.class, args);
 
-        PersonDetailsRepository personDetailsRepository = new PersonDetailsRepositoryListBased();
-        personDetailsRepository.addPerson(1L, "Ola", "Zagrabska");
-        personDetailsRepository.addPerson(2L, "Ania", "Wójcik");
-        personDetailsRepository.addPerson(3L, "Jan", "Nowak");
-        personDetailsRepository.addPerson(4L, "Krzysztof", "Kowalski");
-        personDetailsRepository.addPerson(5L, "Tomasz", "Kowalski");
-        List<PersonDetails> personDetailsRepositoryAll = personDetailsRepository.findAll();
-        System.out.println(personDetailsRepositoryAll);
+        //methods of creating objects
+        //#1 new
+        PersonDetailsRepository personDetailsRepository1 = new PersonDetailsRepositoryListBased(new ArrayList<>());
 
-        List<PersonDetails> personDetailsListFindByLastName = personDetailsRepository.findByLastName("Kowalski");
-        System.out.println(personDetailsListFindByLastName);
+        //#2 BUILDER
+        PersonDetailsRepository personDetailsRepository2 = PersonDetailsRepositoryListBased.builder()
+                .personDetailsList(new ArrayList<>())
+                .build();
 
-        List<PersonDetails> personToUpdate = personDetailsRepository.findById(5L);
-        System.out.println("Przed zmianą: " + personToUpdate);
+        //#3 static-factory method
+        PersonDetailsRepository personDetailsRepository3 = PersonDetailsRepositoryListBased.createInstance();
 
-        boolean updatedPerson = personDetailsRepository.updateLastName(5L, "NowyKowalski");
-        System.out.println("Zaktualizowano: " + updatedPerson);
-        System.out.println("Po: " + personDetailsRepository.findById(5L));
-        System.out.println(personDetailsRepositoryAll);
+        //#4 SINGLETON
+        PersonDetailsRepository personDetailsRepository4 = PersonDetailsRepositoryListBased.createInstanceSingleton();
 
-        boolean deletePerson = personDetailsRepository.deletePerson(1L, "Ola", "Zagrabska");
-        System.out.println("Usunięto: " + deletePerson);
-        System.out.println(personDetailsRepository.findAll());
+        //#5 FACTORY
+        PersonDetailsRepository factory = new PersonDetailsRepositoryListBased();
+        PersonDetailsRepository personDetailsRepository5 = factory.createRepository();
 
-        HireDateRepository hireRepo = new HireDateRepositoryListBased();
-        boolean hireDateAdd = hireRepo.addHireDate(1L, Instant.now());
+        //#6 IoC
+        ConfigurableApplicationContext context = SpringApplication.run(BakeryApplication.class, args);
+        PersonDetailsRepository personDetailsRepository6 = context.getBean(PersonDetailsRepository.class);
+        System.out.println(personDetailsRepository6);
 
-        System.out.println("Dodano datę zatrudnienia: " + hireDateAdd);
-        System.out.println(hireRepo.findAll());
-
-        AddressRepository addrRepo = new AddressRepositoryListBased();
-        boolean addrAdd = addrRepo.addAddress(1L, 54.0, 18.0);
-        System.out.println("Dodano nowy adres: " + addrAdd);
-        System.out.println(addrRepo.findAll());
+//
+//        personDetailsRepository.addPerson(1L, "Ola", "Zagrabska");
+//        personDetailsRepository.addPerson(2L, "Ania", "Wójcik");
+//        personDetailsRepository.addPerson(3L, "Jan", "Nowak");
+//        personDetailsRepository.addPerson(4L, "Krzysztof", "Kowalski");
+//        personDetailsRepository.addPerson(5L, "Tomasz", "Kowalski");
+//        List<PersonDetails> personDetailsRepositoryAll = personDetailsRepository.findAll();
+//        System.out.println(personDetailsRepositoryAll);
+//
+//        List<PersonDetails> personDetailsListFindByLastName = personDetailsRepository.findByLastName("Kowalski");
+//        System.out.println(personDetailsListFindByLastName);
+//
+//        List<PersonDetails> personToUpdate = personDetailsRepository.findById(5L);
+//        System.out.println("Przed zmianą: " + personToUpdate);
+//
+//        boolean updatedPerson = personDetailsRepository.updateLastName(5L, "NowyKowalski");
+//        System.out.println("Zaktualizowano: " + updatedPerson);
+//        System.out.println("Po: " + personDetailsRepository.findById(5L));
+//        System.out.println(personDetailsRepositoryAll);
+//
+//        boolean deletePerson = personDetailsRepository.deletePerson(1L, "Ola", "Zagrabska");
+//        System.out.println("Usunięto: " + deletePerson);
+//        System.out.println(personDetailsRepository.findAll());
+//
+//        HireDateRepository hireRepo = new HireDateRepositoryListBased();
+//        boolean hireDateAdd = hireRepo.addHireDate(1L, Instant.now());
+//
+//        System.out.println("Dodano datę zatrudnienia: " + hireDateAdd);
+//        System.out.println(hireRepo.findAll());
+//
+//        AddressRepository addrRepo = new AddressRepositoryListBased();
+//        boolean addrAdd = addrRepo.addAddress(1L, 54.0, 18.0);
+//        System.out.println("Dodano nowy adres: " + addrAdd);
+//        System.out.println(addrRepo.findAll());
 
     }
 
