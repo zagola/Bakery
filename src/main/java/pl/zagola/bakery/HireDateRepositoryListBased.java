@@ -3,9 +3,12 @@ package pl.zagola.bakery;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class HireDateRepositoryListBased implements HireDateRepository {
-    private HireDate hireDate;
+
     private List<HireDate> hireDateList = new ArrayList<>();
 
     @Override
@@ -20,7 +23,10 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findNewHires(int daysBack) {
-        return List.of();
+        Instant threshold = Instant.now().minus(daysBack, DAYS);
+        return hireDateList.stream()
+                .filter(h -> h.getHireDate().isAfter(threshold))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -39,12 +45,8 @@ public class HireDateRepositoryListBased implements HireDateRepository {
     }
 
     @Override
-    public boolean updateHireDate(Long id, Instant hireDate) {
+    public boolean updateHireDate(Long id, Instant newHireDate) {
         return false;
     }
 
-    @Override
-    public boolean deleteHireDate(Long id) {
-        return false;
-    }
 }
