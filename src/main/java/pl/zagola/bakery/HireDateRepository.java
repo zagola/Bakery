@@ -16,8 +16,6 @@ public interface HireDateRepository {
 
     List<HireDate> findHireDateBetween(Instant from, Instant to);
 
-    boolean updateHireDate(Long personId, Instant hireDate);
-
-    boolean deleteHireDate(Long personId);
-
+    boolean updateHireDate(Long personId, Instant newHireDate);
+    
 }
