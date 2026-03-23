@@ -14,7 +14,8 @@ public interface PersonDetailsRepository {
 
     boolean updateLastName(Long id, String newLastName);
 
-
     boolean deletePerson(Long id, String firstName, String lastName);
+
+    PersonDetailsRepository createRepository();
 
 }

@@ -1,12 +1,21 @@
 package pl.zagola.bakery;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Repository
 public class PersonDetailsRepositoryListBased implements PersonDetailsRepository {
-    private PersonDetails personDetails;
-    private List<PersonDetails> personDetailsList = new ArrayList<>();
+    private List<PersonDetails> personDetailsList;
+    private static PersonDetailsRepositoryListBased INSTANCE = null;
 
     @Override
     public boolean addPerson(Long id, String firstName, String lastName) {
@@ -52,4 +61,21 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
                 && id.equals(p.getId()));
     }
 
+    public static PersonDetailsRepositoryListBased createInstance() {
+        return new PersonDetailsRepositoryListBased(new ArrayList<>());
+    }
+
+    public static PersonDetailsRepositoryListBased createInstanceSingleton() {
+        if (INSTANCE == null) {
+            INSTANCE = new PersonDetailsRepositoryListBased(new ArrayList<>());
+            return INSTANCE;
+        } else {
+            return INSTANCE;
+        }
+    }
+
+    @Override
+    public PersonDetailsRepository createRepository() {
+        return new PersonDetailsRepositoryListBased(new ArrayList<>());
+    }
 }
