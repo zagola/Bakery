@@ -39,6 +39,38 @@ public class BakeryApplication {
         PersonDetailsRepository personDetailsRepository6 = context.getBean(PersonDetailsRepository.class);
         System.out.println(personDetailsRepository6);
 
+        personDetailsRepository2.addPerson(5L, "jan", "kowalski");
+        personDetailsRepository2.updatePerson(5L, "nowak");
+        List<PersonDetails> all = personDetailsRepository2.findAll();
+        System.out.println(all);
+
+        HireDateRepository hireDateRepository = HireDateRepositoryListBased.builder()
+                .hireDateList(new ArrayList<>())
+                .build();
+
+        hireDateRepository.addHireDate(5L, Instant.now());
+        hireDateRepository.addHireDate(1L, Instant.parse("2024-01-01T08:00:00Z"));
+        hireDateRepository.addHireDate(2L, Instant.parse("2024-08-01T08:00:00Z"));
+        hireDateRepository.addHireDate(3L, Instant.parse("2025-10-01T08:00:00Z"));
+
+        List<HireDate> allHires = hireDateRepository.findAll();
+        System.out.println(allHires);
+
+        List<HireDate> newHires = hireDateRepository.findNewHires(365);
+        System.out.println(newHires);
+
+        List<HireDate> longTermEmployees1 = hireDateRepository.findLongTermEmployees(5);
+        if (longTermEmployees1.isEmpty()) {
+            System.out.println("No employees found.");
+        } else {
+            System.out.println(longTermEmployees1);
+        }
+        List<HireDate> longTermEmployees2 = hireDateRepository.findLongTermEmployees(2);
+        System.out.println(longTermEmployees2);
+
+        List<HireDate> findByYear = hireDateRepository.findByHireYear(2024);
+        System.out.println("hire in 2024: " + findByYear);
+
 //
 //        personDetailsRepository.addPerson(1L, "Ola", "Zagrabska");
 //        personDetailsRepository.addPerson(2L, "Ania", "Wójcik");

@@ -3,8 +3,8 @@ package pl.zagola.bakery;
 import java.time.Instant;
 
 public class HireDate {
-    private Long personId;
-    private Instant hireDate;
+    private final Long personId;
+    private final Instant hireDate;
 
     public HireDate(Long personId, Instant hireDate) {
         this.personId = personId;
@@ -15,17 +15,10 @@ public class HireDate {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
     public Instant getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Instant hireDate) {
-        this.hireDate = hireDate;
-    }
 
     @Override
     public String toString() {
