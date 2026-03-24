@@ -12,7 +12,7 @@ public interface PersonDetailsRepository {
 
     List<PersonDetails> findById(Long id);
 
-    boolean updateLastName(Long id, String newLastName);
+    boolean updatePerson(Long id, String newLastName);
 
     boolean deletePerson(Long id, String firstName, String lastName);
 

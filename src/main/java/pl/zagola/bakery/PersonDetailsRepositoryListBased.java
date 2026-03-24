@@ -44,15 +44,21 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public boolean updateLastName(Long id, String newLastName) {
+    public boolean updatePerson(Long id, String newLastName) {
         return personDetailsList.stream()
                 .filter(p -> p != null && p.getId() != null && id.equals(p.getId()))
                 .findFirst()
-                .map(p -> {
-                    p.setLastName(newLastName);
-                    return true;
+                .map(p -> { //p - "oldPerson"
+                    int index = personDetailsList.indexOf(p);
+                    if (index != -1) {
+                        PersonDetails updated = new PersonDetails(id, p.getFirstName(), newLastName);
+                        personDetailsList.set(index, updated); //replace
+                        return true;
+                    }
+                    return false;
                 })
                 .orElse(false);
+
     }
 
     @Override
