@@ -1,12 +1,24 @@
 package pl.zagola.bakery;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.YEARS;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Repository
 public class HireDateRepositoryListBased implements HireDateRepository {
 
     private List<HireDate> hireDateList = new ArrayList<>();
@@ -31,12 +43,23 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findLongTermEmployees(int minYears) {
-        return List.of();
+        OffsetDateTime now = Instant.now().atOffset(ZoneOffset.UTC); //add time-zone, convert to instant
+        OffsetDateTime threshold = now.minusYears(minYears);
+        Instant thresholdInstant = threshold.toInstant();
+        return hireDateList.stream()
+                .filter(h -> h.getHireDate().isBefore(thresholdInstant))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<HireDate> findByHireYear(int year) {
-        return List.of();
+        return hireDateList.stream()
+                .filter(h -> h.getHireDate() != null)
+                .filter(h -> {
+                    OffsetDateTime hireDate = h.getHireDate().atOffset(ZoneOffset.UTC); //convert instant - offsetDateTime(add UTC offset)
+                    return hireDate.getYear() == year;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
