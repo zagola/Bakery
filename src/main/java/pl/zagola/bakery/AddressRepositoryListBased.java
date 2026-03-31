@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressRepositoryListBased implements AddressRepository {
-    private Address address;
     private List<Address> addressList = new ArrayList<>();
 
     @Override
     public boolean addAddress(Long personId, double latitude, double longitude) {
+        if (personId == null) {
+            return false;
+        }
+        //checks for duplicates - add address only if it doesn't exist, update only if exists
+        boolean exists = addressList.stream()
+                .anyMatch(a -> a.getPersonId().equals(personId));
+
+        if (exists) {
+            return false;
+        }
+
         return addressList.add(new Address(personId, latitude, longitude));
     }
 
@@ -19,16 +29,37 @@ public class AddressRepositoryListBased implements AddressRepository {
 
     @Override
     public List<Address> findByPersonId(Long personId) {
-        return List.of();
+        if (personId == null) {
+            return List.of();
+        }
+
+        return addressList.stream()
+                .filter(a -> a.getPersonId().equals(personId))
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean updateAddress(Long personId, double latitude, double longitude) {
+        if (personId == null) {
+            return false;
+        }
+
+        boolean found = addressList.stream()
+                .anyMatch(a -> a.getPersonId().equals(personId));
+
+        if (found) {
+            addressList.removeIf(a -> a.getPersonId().equals(personId));
+            addressList.add(new Address(personId, latitude, longitude));
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean deleteAddress(Long personId) {
-        return addressList.removeIf(a -> a != null && a.getPersonId().equals(personId));
+        if (personId == null) {
+            return false;
+        }
+        return addressList.removeIf(a -> a.getPersonId().equals(personId));
     }
 }
