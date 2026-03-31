@@ -18,9 +18,9 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     private static PersonDetailsRepositoryListBased INSTANCE = null;
 
     @Override
-    public boolean addPerson(Long id, String firstName, String lastName) {
+    public boolean addPerson(Long personId, String firstName, String lastName) {
         return personDetailsList.add(
-                new PersonDetails(id, firstName, lastName)
+                new PersonDetails(personId, firstName, lastName)
         );
     }
 
@@ -30,9 +30,9 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public List<PersonDetails> findById(Long id) {
+    public List<PersonDetails> findById(Long personId) {
         return personDetailsList.stream()
-                .filter(p -> p != null && p.getId() != null && id.equals(p.getId()))
+                .filter(p -> p != null && p.getPersonId() != null && personId.equals(p.getPersonId()))
                 .collect(Collectors.toList());
     }
 
@@ -44,14 +44,14 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public boolean updatePerson(Long id, String newLastName) {
+    public boolean updatePerson(Long personId, String newLastName) {
         return personDetailsList.stream()
-                .filter(p -> p != null && p.getId() != null && id.equals(p.getId()))
+                .filter(p -> p != null && p.getPersonId() != null && personId.equals(p.getPersonId()))
                 .findFirst()
                 .map(p -> { //p - "oldPerson"
                     int index = personDetailsList.indexOf(p);
                     if (index != -1) {
-                        PersonDetails updated = new PersonDetails(id, p.getFirstName(), newLastName);
+                        PersonDetails updated = new PersonDetails(personId, p.getFirstName(), newLastName);
                         personDetailsList.set(index, updated); //replace
                         return true;
                     }
@@ -62,9 +62,9 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public boolean deletePerson(Long id, String firstName, String lastName) {
-        return personDetailsList.removeIf(p -> p != null && p.getId() != null
-                && id.equals(p.getId()));
+    public boolean deletePerson(Long personId, String firstName, String lastName) {
+        return personDetailsList.removeIf(p -> p != null && p.getPersonId() != null
+                && personId.equals(p.getPersonId()));
     }
 
     public static PersonDetailsRepositoryListBased createInstance() {
