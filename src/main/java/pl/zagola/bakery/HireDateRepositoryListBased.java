@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.YEARS;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -64,12 +63,30 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findHireDateBetween(Instant from, Instant to) {
-        return List.of();
+        if (from == null || to == null || from.isAfter(to)) {
+            return List.of();
+        }
+        return hireDateList.stream()
+                .filter(h -> h.getHireDate() != null)
+                .filter(h -> !h.getHireDate().isBefore(from) && !h.getHireDate().isAfter(to))  //from <= hireDate <= to
+                .collect(Collectors.toList());
+
     }
 
     @Override
-    public boolean updateHireDate(Long id, Instant newHireDate) {
-        return false;
+    public boolean updateHireDate(Long personId, Instant newHireDate) {
+        if (personId == null || newHireDate == null) {
+            return false;
+        }
+        return hireDateList.stream()
+                .filter(h -> h.getPersonId().equals(personId))
+                .findFirst()
+                .map(h -> {
+                    hireDateList.removeIf(existing -> existing.getPersonId().equals(personId));
+                    hireDateList.add(new HireDate(personId, newHireDate));
+                    return true;
+                })
+                .orElse(false);
     }
 
 }
