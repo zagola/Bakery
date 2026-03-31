@@ -12,7 +12,7 @@ import java.util.List;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class BakeryApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         //SpringApplication.run(BakeryApplication.class, args);
 
         //methods of creating objects
@@ -77,6 +77,27 @@ public class BakeryApplication {
         boolean updateHireDate = hireDateRepository.updateHireDate(1L, Instant.parse("2026-01-01T08:00:00Z"));
         System.out.println("update hire date: " + updateHireDate);
         System.out.println(hireDateRepository.findAll());
+
+        AddressRepository addressRepository = AddressRepositoryListBased.builder()
+                .addressList(new ArrayList<>())
+                .build();
+
+        addressRepository.addAddress(1L, 52, 21);
+        addressRepository.addAddress(2L, 51, 17);
+
+        List<Address> allAddresses = addressRepository.findAll();
+        System.out.println(allAddresses);
+
+        List<Address> findAddress = addressRepository.findByPersonId(2L);
+        System.out.println(findAddress);
+
+        boolean updateAddress = addressRepository.updateAddress(1L, 53, 23);
+        System.out.println("update address: " + updateAddress);
+        System.out.println(addressRepository.findAll());
+
+        boolean deleteAddress = addressRepository.deleteAddress(2L);
+        System.out.println("delete address: " + deleteAddress);
+        System.out.println(addressRepository.findAll());
 
     }
 
