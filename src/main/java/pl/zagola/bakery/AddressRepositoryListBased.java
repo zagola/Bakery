@@ -1,8 +1,18 @@
 package pl.zagola.bakery;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Repository
 public class AddressRepositoryListBased implements AddressRepository {
     private List<Address> addressList = new ArrayList<>();
 
