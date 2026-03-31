@@ -1,19 +1,19 @@
 package pl.zagola.bakery;
 
 class PersonDetails {
-    private final Long id;
+    private final Long personId;
     private final String firstName;
     private final String lastName;
 
     PersonDetails(Long id, String firstName, String lastName) {
-        this.id = id;
+        this.personId = id;
         this.firstName = firstName;
         this.lastName = lastName;
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getPersonId() {
+        return personId;
     }
 
     public String getFirstName() {
@@ -26,6 +26,6 @@ class PersonDetails {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + id;
+        return firstName + " " + lastName + " " + personId;
     }
 }
