@@ -1,9 +1,11 @@
 package pl.zagola.bakery;
 
+import java.util.Objects;
+
 public class Address {
-    private Long personId;
-    private double latitude;
-    private double longitude;
+    private final Long personId;
+    private final double latitude;
+    private final double longitude;
 
     public Address(Long personId, double latitude, double longitude) {
         this.personId = personId;
@@ -15,25 +17,12 @@ public class Address {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
     public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-
     public double getLongitude() {
         return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
     }
 
     @Override
@@ -41,4 +30,16 @@ public class Address {
         return String.format("Address{personId=%d, lat=%.4f, lon=%.4f}",
                 personId, latitude, longitude);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Address address)) return false;
+        return Objects.equals(personId, address.personId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(personId);
+    }
+
 }

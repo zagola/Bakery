@@ -1,5 +1,7 @@
 package pl.zagola.bakery;
 
+import java.util.Objects;
+
 class PersonDetails {
     private final Long personId;
     private final String firstName;
@@ -9,7 +11,6 @@ class PersonDetails {
         this.personId = id;
         this.firstName = firstName;
         this.lastName = lastName;
-
     }
 
     public Long getPersonId() {
@@ -28,4 +29,16 @@ class PersonDetails {
     public String toString() {
         return firstName + " " + lastName + " " + personId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PersonDetails that)) return false;
+        return Objects.equals(personId, that.personId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(personId);
+    }
+    
 }
