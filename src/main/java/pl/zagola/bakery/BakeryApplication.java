@@ -69,42 +69,14 @@ public class BakeryApplication {
         System.out.println(longTermEmployees2);
 
         List<HireDate> findByYear = hireDateRepository.findByHireYear(2024);
-        System.out.println("hire in 2024: " + findByYear);
+        System.out.println("hired in 2024: " + findByYear);
 
-//
-//        personDetailsRepository.addPerson(1L, "Ola", "Zagrabska");
-//        personDetailsRepository.addPerson(2L, "Ania", "Wójcik");
-//        personDetailsRepository.addPerson(3L, "Jan", "Nowak");
-//        personDetailsRepository.addPerson(4L, "Krzysztof", "Kowalski");
-//        personDetailsRepository.addPerson(5L, "Tomasz", "Kowalski");
-//        List<PersonDetails> personDetailsRepositoryAll = personDetailsRepository.findAll();
-//        System.out.println(personDetailsRepositoryAll);
-//
-//        List<PersonDetails> personDetailsListFindByLastName = personDetailsRepository.findByLastName("Kowalski");
-//        System.out.println(personDetailsListFindByLastName);
-//
-//        List<PersonDetails> personToUpdate = personDetailsRepository.findById(5L);
-//        System.out.println("Przed zmianą: " + personToUpdate);
-//
-//        boolean updatedPerson = personDetailsRepository.updateLastName(5L, "NowyKowalski");
-//        System.out.println("Zaktualizowano: " + updatedPerson);
-//        System.out.println("Po: " + personDetailsRepository.findById(5L));
-//        System.out.println(personDetailsRepositoryAll);
-//
-//        boolean deletePerson = personDetailsRepository.deletePerson(1L, "Ola", "Zagrabska");
-//        System.out.println("Usunięto: " + deletePerson);
-//        System.out.println(personDetailsRepository.findAll());
-//
-//        HireDateRepository hireRepo = new HireDateRepositoryListBased();
-//        boolean hireDateAdd = hireRepo.addHireDate(1L, Instant.now());
-//
-//        System.out.println("Dodano datę zatrudnienia: " + hireDateAdd);
-//        System.out.println(hireRepo.findAll());
-//
-//        AddressRepository addrRepo = new AddressRepositoryListBased();
-//        boolean addrAdd = addrRepo.addAddress(1L, 54.0, 18.0);
-//        System.out.println("Dodano nowy adres: " + addrAdd);
-//        System.out.println(addrRepo.findAll());
+        List<HireDate> findHireDateBetween = hireDateRepository.findHireDateBetween(Instant.parse("2024-01-01T08:00:00Z"), Instant.now());
+        System.out.println("hired since 2024: " + findHireDateBetween);
+
+        boolean updateHireDate = hireDateRepository.updateHireDate(1L, Instant.parse("2026-01-01T08:00:00Z"));
+        System.out.println("update hire date: " + updateHireDate);
+        System.out.println(hireDateRepository.findAll());
 
     }
 
