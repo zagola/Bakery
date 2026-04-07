@@ -2,10 +2,10 @@ package pl.zagola.bakery;
 
 import java.util.List;
 
-public class BakeryProductManagement implements BakeryProductRepository {
+public class BakeryProductListBased implements BakeryProductRepository {
     private List<BakeryProduct> products;
 
-    public BakeryProductManagement(List<BakeryProduct> products) {
+    public BakeryProductListBased(List<BakeryProduct> products) {
         this.products = products;
     }
 
