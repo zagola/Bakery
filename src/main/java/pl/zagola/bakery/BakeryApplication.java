@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class BakeryApplication {
@@ -98,6 +99,32 @@ public class BakeryApplication {
         boolean deleteAddress = addressRepository.deleteAddress(2L);
         System.out.println("delete address: " + deleteAddress);
         System.out.println(addressRepository.findAll());
+
+        EmployeeRepository employeeRepository = EmployeeRepositoryListBased.builder()
+                .employeeList(new ArrayList<>())
+                .build();
+
+        boolean addE1 = employeeRepository.addEmployee(new PersonDetails(6L, "Olaf", "Nowak"), Instant.parse("2023-05-01T08:00:00Z"));
+        System.out.println("Add new employee: " + addE1);
+        boolean addE2 = employeeRepository.addEmployee(new PersonDetails(7L, "Jan", "Mazur"), Instant.parse("2023-06-01T08:00:00Z"));
+        System.out.println("Add new employee: " + addE2);
+        List<Employee> newEmployees = employeeRepository.findAll();
+        System.out.println(newEmployees);
+
+        Optional<Employee> find = employeeRepository.findByPersonId(7L);
+        System.out.println(find);
+
+        boolean updateEmp = employeeRepository.updateEmployee(7l, new PersonDetails(8L, "Jan", "Mazurek"), Instant.parse("2023-06-01T08:00:00Z"));
+        System.out.println("Update employee: " + updateEmp);
+        System.out.println(employeeRepository.findAll());
+
+        boolean deleteEmp = employeeRepository.deleteEmployee(7l);
+        System.out.println("Delete employee: " + deleteEmp);
+
+        boolean deleteEmp2 = employeeRepository.deleteEmployee(6l);
+        System.out.println("Delete employee: " + deleteEmp2);
+        List<Employee> allEmployees = employeeRepository.findAll();
+        System.out.println(allEmployees);
 
     }
 
