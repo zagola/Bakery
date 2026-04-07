@@ -2,7 +2,7 @@ package pl.zagola.bakery;
 
 import java.util.Objects;
 
-class PersonDetails {
+public class PersonDetails {
     private final Long personId;
     private final String firstName;
     private final String lastName;
@@ -40,5 +40,5 @@ class PersonDetails {
     public int hashCode() {
         return Objects.hashCode(personId);
     }
-    
+
 }
