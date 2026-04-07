@@ -1,21 +1,28 @@
 package pl.zagola.bakery;
 
-class Client {
-    private PersonDetails details;
-    private Address address;
-    private Integer clientId;
+public class Client {
+    private final PersonDetails personDetails;
+    private final Address address;
 
-    protected Client(PersonDetails details, Address address, Integer clientId) {
-        this.details = details;
+
+    public Client(PersonDetails personDetails, Address address) {
+        this.personDetails = personDetails;
         this.address = address;
-        this.clientId = clientId;
+    }
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public PersonDetails getDetails() {
-        return details;
+    @Override
+    public String toString() {
+        return "Client{" +
+                "address=" + address +
+                ", personDetails=" + personDetails +
+                '}';
     }
 }
