@@ -2,13 +2,12 @@ package pl.zagola.bakery;
 
 import java.time.Instant;
 
-class Employee {
-    private PersonDetails details;
-    private Instant hireDate;
+public class Employee {
+    private final PersonDetails personDetails;
+    private final Instant hireDate;
 
-
-    protected Employee(PersonDetails details, Instant employmentDate) {
-        this.details = details;
+    public Employee(PersonDetails details, Instant employmentDate) {
+        this.personDetails = details;
         this.hireDate = employmentDate;
     }
 
@@ -16,7 +15,15 @@ class Employee {
         return hireDate;
     }
 
-    public PersonDetails getDetails() {
-        return details;
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "details=" + personDetails +
+                ", hireDate=" + hireDate +
+                '}';
     }
 }
