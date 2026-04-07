@@ -9,10 +9,10 @@ public interface ClientRepository {
 
     List<Client> findAll();
 
-    Optional<Client> findById(Long personId);
+    Optional<Client> findByPersonId(Long personId);
 
     boolean updateClient(Long personId, PersonDetails updatedPersonDetails, Address updatedAddress);
 
-    boolean removeClient(Long personId);
+    boolean deleteClient(Long personId);
 
 }
