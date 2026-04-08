@@ -52,16 +52,16 @@ public class ClientRepositoryListBased implements ClientRepository {
     }
 
     @Override
-    public boolean updateClient(Long personId, PersonDetails updatedPersonDetails, Address updatedAddress) {
-        if (personId == null || updatedPersonDetails == null || updatedAddress == null) {
+    public boolean updateClient(PersonDetails updatedPersonDetails, Address updatedAddress) {
+        if (updatedPersonDetails == null || updatedAddress == null) {
             return false;
         }
 
         boolean found = clientList.stream()
-                .anyMatch(c -> c.getPersonDetails().getPersonId().equals(personId));
+                .anyMatch(c -> c.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
 
         if (found) {
-            clientList.removeIf(c -> c.getPersonDetails().getPersonId().equals(personId));
+            clientList.removeIf(c -> c.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
             clientList.add(new Client(updatedPersonDetails, updatedAddress));
             return true;
         }
