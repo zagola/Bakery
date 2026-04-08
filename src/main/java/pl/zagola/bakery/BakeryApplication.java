@@ -126,6 +126,34 @@ public class BakeryApplication {
         List<Employee> allEmployees = employeeRepository.findAll();
         System.out.println(allEmployees);
 
+        ClientRepository clientRepository = ClientRepositoryListBased.builder()
+                .clientList(new ArrayList<>())
+                .build();
+
+        boolean addCli1 = clientRepository.addClient(new PersonDetails(10L, "Anna", "Zawadzka"), new Address(10L, 52.0, 18.0));
+        System.out.println("Add new client: " + addCli1);
+        boolean addCli2 = clientRepository.addClient(new PersonDetails(11L, "Piotr", "Kowalski"), new Address(11L, 51.0, 21.0));
+        System.out.println("Add new client: " + addCli2);
+        List<Client> allClients = clientRepository.findAll();
+        System.out.println(allClients);
+
+        Optional<Client> findCli1 = clientRepository.findByPersonId(11L);
+        System.out.println(findCli1);
+        Optional<Client> findCli2 = clientRepository.findByPersonId(2L);
+        System.out.println(findCli2);
+
+        boolean updateCli = clientRepository.updateClient(10L, new PersonDetails(10L, "Anna", "Kowalska"), new Address(10L, 52.0, 18.0));
+        System.out.println("Update client: " + updateCli);
+        List<Client> findAll = clientRepository.findAll();
+        System.out.println(findAll);
+
+        boolean cli1 = clientRepository.deleteClient(1L);
+        System.out.println("Delete client: " + cli1);
+        boolean cli11 = clientRepository.deleteClient(11L);
+        System.out.println("Delete client: " + cli11);
+        List<Client> allClients1 = clientRepository.findAll();
+        System.out.println(allClients1);
+
     }
 
 }
