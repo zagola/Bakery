@@ -43,6 +43,7 @@ public class BakeryApplication {
         boolean addPerson = personDetailsRepository2.addPerson(new PersonDetails(3L, "jan", "kowalski"));
         boolean addPerson2 = personDetailsRepository2.addPerson(new PersonDetails(4L, "jadwiga", "mazur"));
         System.out.println("add person " + addPerson);
+        System.out.println("add person " + addPerson2);
         List<PersonDetails> all = personDetailsRepository2.findAll();
         System.out.println(all);
         boolean updatePerson = personDetailsRepository2.updatePerson(new PersonDetails(3L, "jarek", "kowalski"));
@@ -77,10 +78,10 @@ public class BakeryApplication {
         if (longTermEmployees1.isEmpty()) {
             System.out.println("No employees found.");
         } else {
-            System.out.println(longTermEmployees1);
+            System.out.println("employees hired 5 years ago" + longTermEmployees1);
         }
         List<HireDate> longTermEmployees2 = hireDateRepository.findLongTermEmployees(2);
-        System.out.println(longTermEmployees2);
+        System.out.println("employees hired 2 years ago " + longTermEmployees2);
 
         List<HireDate> findByYear = hireDateRepository.findByHireYear(2024);
         System.out.println("hired in 2024: " + findByYear);
@@ -131,10 +132,10 @@ public class BakeryApplication {
         System.out.println("Update employee: " + updateEmp);
         System.out.println(employeeRepository.findAll());
 
-        boolean deleteEmp = employeeRepository.deleteEmployee(7l);
+        boolean deleteEmp = employeeRepository.deleteEmployee(7L);
         System.out.println("Delete employee: " + deleteEmp);
 
-        boolean deleteEmp2 = employeeRepository.deleteEmployee(6l);
+        boolean deleteEmp2 = employeeRepository.deleteEmployee(6L);
         System.out.println("Delete employee: " + deleteEmp2);
         List<Employee> allEmployees = employeeRepository.findAll();
         System.out.println(allEmployees);
