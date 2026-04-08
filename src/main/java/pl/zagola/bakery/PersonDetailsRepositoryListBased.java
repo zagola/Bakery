@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -14,14 +15,12 @@ import java.util.stream.Collectors;
 @Builder
 @Repository
 public class PersonDetailsRepositoryListBased implements PersonDetailsRepository {
-    private List<PersonDetails> personDetailsList;
+    private List<PersonDetails> personDetailsList = new ArrayList<>();
     private static PersonDetailsRepositoryListBased INSTANCE = null;
 
     @Override
-    public boolean addPerson(Long personId, String firstName, String lastName) {
-        return personDetailsList.add(
-                new PersonDetails(personId, firstName, lastName)
-        );
+    public boolean addPerson(PersonDetails personDetails) {
+        return personDetailsList.add(personDetails);
     }
 
     @Override
@@ -30,10 +29,13 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public List<PersonDetails> findById(Long personId) {
+    public Optional<PersonDetails> findById(Long personId) {
+        if (personId == null) {
+            return Optional.empty();
+        }
         return personDetailsList.stream()
-                .filter(p -> p != null && p.getPersonId() != null && personId.equals(p.getPersonId()))
-                .collect(Collectors.toList());
+                .filter(p -> p.getPersonId().equals(personId))
+                .findFirst();
     }
 
     @Override
@@ -44,44 +46,43 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     @Override
-    public boolean updatePerson(Long personId, String newLastName) {
-        return personDetailsList.stream()
-                .filter(p -> p != null && p.getPersonId() != null && personId.equals(p.getPersonId()))
-                .findFirst()
-                .map(p -> { //p - "oldPerson"
-                    int index = personDetailsList.indexOf(p);
-                    if (index != -1) {
-                        PersonDetails updated = new PersonDetails(personId, p.getFirstName(), newLastName);
-                        personDetailsList.set(index, updated); //replace
-                        return true;
-                    }
-                    return false;
-                })
-                .orElse(false);
+    public boolean updatePerson(PersonDetails updatedPersonDetails) {
+        if (updatedPersonDetails == null) {
+            return false;
+        }
 
+        boolean found = personDetailsList.stream()
+                .anyMatch(p -> p.getPersonId().equals(updatedPersonDetails.getPersonId()));
+
+        if (found) {
+            personDetailsList.removeIf(p -> p.getPersonId().equals(updatedPersonDetails.getPersonId()));
+            personDetailsList.add(updatedPersonDetails);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean deletePerson(Long personId, String firstName, String lastName) {
-        return personDetailsList.removeIf(p -> p != null && p.getPersonId() != null
-                && personId.equals(p.getPersonId()));
-    }
-
-    public static PersonDetailsRepositoryListBased createInstance() {
-        return new PersonDetailsRepositoryListBased(new ArrayList<>());
-    }
-
-    public static PersonDetailsRepositoryListBased createInstanceSingleton() {
-        if (INSTANCE == null) {
-            INSTANCE = new PersonDetailsRepositoryListBased(new ArrayList<>());
-            return INSTANCE;
-        } else {
-            return INSTANCE;
-        }
+    public boolean deletePerson(Long personId) {
+      if(personId == null) {
+          return false;
+      }
+      return personDetailsList.removeIf(p -> p.getPersonId().equals(personId));
     }
 
     @Override
     public PersonDetailsRepository createRepository() {
         return new PersonDetailsRepositoryListBased(new ArrayList<>());
+    }
+
+    public static PersonDetailsRepositoryListBased createInstance() {
+        return new  PersonDetailsRepositoryListBased(new ArrayList<>());
+    }
+
+    public static PersonDetailsRepositoryListBased createInstanceSingleton() {
+        if (INSTANCE == null) {
+            INSTANCE = new PersonDetailsRepositoryListBased(new ArrayList<>());
+        }
+        return INSTANCE;
     }
 }
