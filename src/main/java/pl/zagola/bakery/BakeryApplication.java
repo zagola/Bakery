@@ -142,7 +142,7 @@ public class BakeryApplication {
         Optional<Client> findCli2 = clientRepository.findByPersonId(2L);
         System.out.println(findCli2);
 
-        boolean updateCli = clientRepository.updateClient(10L, new PersonDetails(10L, "Anna", "Kowalska"), new Address(10L, 52.0, 18.0));
+        boolean updateCli = clientRepository.updateClient(new PersonDetails(10L, "Anna", "Kowalska"), new Address(10L, 52.0, 18.0));
         System.out.println("Update client: " + updateCli);
         List<Client> findAll = clientRepository.findAll();
         System.out.println(findAll);
@@ -153,6 +153,27 @@ public class BakeryApplication {
         System.out.println("Delete client: " + cli11);
         List<Client> allClients1 = clientRepository.findAll();
         System.out.println(allClients1);
+
+        OwnerRepository ownerRepository = OwnerRepositoryListBased.builder()
+                .ownerList(new ArrayList<>())
+                .build();
+
+        boolean adDOwner = ownerRepository.addOwner(new PersonDetails(1L, "Jan", "Właściciel"), new Address(1L, 52.0, 21.0), new HireDate(1L, Instant.parse("2020-06-01T08:00:00Z")));
+        System.out.println("Add owner: " + adDOwner);
+
+        List<Owner> owner = ownerRepository.findOwner();
+        System.out.println(owner);
+
+        Optional<Owner> byId = ownerRepository.findById(1L);
+        System.out.println(byId);
+
+        boolean newOwner = ownerRepository.updateOwner(new PersonDetails(1L, "Tomasz", "NowyWłaściciel"), new Address(1L, 52.0, 21.0), new HireDate(1L, Instant.parse("2026-04-01T08:00:00Z")));
+        System.out.println("Update owner: " + newOwner);
+        System.out.println("Update owner: " + ownerRepository.findById(1L));
+
+        boolean deleteOwner = ownerRepository.deleteOwner(1L);
+        System.out.println("Delete owner: " + deleteOwner);
+        System.out.println("Where is the owner? " + ownerRepository.findById(1L));
 
     }
 
