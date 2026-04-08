@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.time.temporal.ChronoUnit.DAYS;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,7 +32,7 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findNewHires(int daysBack) {
-        Instant threshold = Instant.now().minus(daysBack, DAYS);
+        Instant threshold = TimeProvider.now().minusDays(daysBack).toInstant();
         return hireDateList.stream()
                 .filter(h -> h.getHireDate().isAfter(threshold))
                 .collect(Collectors.toList());
@@ -42,8 +40,7 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findLongTermEmployees(int minYears) {
-        OffsetDateTime now = Instant.now().atOffset(ZoneOffset.UTC); //add time-zone, convert to instant
-        OffsetDateTime threshold = now.minusYears(minYears);
+        OffsetDateTime threshold = TimeProvider.now().minusYears(minYears);
         Instant thresholdInstant = threshold.toInstant();
         return hireDateList.stream()
                 .filter(h -> h.getHireDate().isBefore(thresholdInstant))
@@ -53,11 +50,7 @@ public class HireDateRepositoryListBased implements HireDateRepository {
     @Override
     public List<HireDate> findByHireYear(int year) {
         return hireDateList.stream()
-                .filter(h -> h.getHireDate() != null)
-                .filter(h -> {
-                    OffsetDateTime hireDate = h.getHireDate().atOffset(ZoneOffset.UTC); //convert instant - offsetDateTime(add UTC offset)
-                    return hireDate.getYear() == year;
-                })
+                .filter(h -> h.getHireDate().atOffset(ZoneOffset.UTC).getYear() == year)
                 .collect(Collectors.toList());
     }
 
