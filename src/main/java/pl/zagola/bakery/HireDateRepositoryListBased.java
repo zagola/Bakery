@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,25 +30,24 @@ public class HireDateRepositoryListBased implements HireDateRepository {
 
     @Override
     public List<HireDate> findNewHires(int daysBack) {
-        Instant threshold = TimeProvider.now().minusDays(daysBack).toInstant();
+        Instant threshold = TimeProvider.thresholdBeforeDays(daysBack);
         return hireDateList.stream()
-                .filter(h -> h.getHireDate().isAfter(threshold))
+                .filter(h -> h.getHireDate() != null && h.getHireDate().isAfter(threshold))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<HireDate> findLongTermEmployees(int minYears) {
-        OffsetDateTime threshold = TimeProvider.now().minusYears(minYears);
-        Instant thresholdInstant = threshold.toInstant();
+        Instant threshold = TimeProvider.thresholdBeforeYears(minYears);
         return hireDateList.stream()
-                .filter(h -> h.getHireDate().isBefore(thresholdInstant))
+                .filter(h -> h.getHireDate() != null && h.getHireDate().isBefore(threshold))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<HireDate> findByHireYear(int year) {
         return hireDateList.stream()
-                .filter(h -> h.getHireDate().atOffset(ZoneOffset.UTC).getYear() == year)
+                .filter(h -> TimeProvider.isYear(h.getHireDate(), year))
                 .collect(Collectors.toList());
     }
 
@@ -60,8 +57,7 @@ public class HireDateRepositoryListBased implements HireDateRepository {
             return List.of();
         }
         return hireDateList.stream()
-                .filter(h -> h.getHireDate() != null)
-                .filter(h -> !h.getHireDate().isBefore(from) && !h.getHireDate().isAfter(to))  //from <= hireDate <= to
+                .filter(h -> TimeProvider.dateBetween(h.getHireDate(), from, to))
                 .collect(Collectors.toList());
 
     }
