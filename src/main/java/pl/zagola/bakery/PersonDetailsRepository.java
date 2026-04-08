@@ -1,20 +1,21 @@
 package pl.zagola.bakery;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonDetailsRepository {
 
-    boolean addPerson(Long personId, String firstName, String lastName);
+    boolean addPerson(PersonDetails personDetails);
 
     List<PersonDetails> findAll();
 
     List<PersonDetails> findByLastName(String lastName);
 
-    List<PersonDetails> findById(Long personId);
+    Optional<PersonDetails> findById(Long personId);
 
-    boolean updatePerson(Long personId, String newLastName);
+    boolean updatePerson(PersonDetails updatedPersonDetails);
 
-    boolean deletePerson(Long personId, String firstName, String lastName);
+    boolean deletePerson(Long personId);
 
     PersonDetailsRepository createRepository();
 
