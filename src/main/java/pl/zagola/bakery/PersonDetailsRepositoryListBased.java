@@ -52,10 +52,11 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
         }
 
         boolean found = personDetailsList.stream()
-                .anyMatch(p -> p.getPersonId().equals(updatedPersonDetails.getPersonId()));
+                .anyMatch(oldPerson -> oldPerson.getPersonId().equals(updatedPersonDetails.getPersonId()));
 
         if (found) {
-            personDetailsList.removeIf(p -> p.getPersonId().equals(updatedPersonDetails.getPersonId()));
+            personDetailsList.removeIf(oldPerson -> oldPerson.getPersonId()
+                    .equals(updatedPersonDetails.getPersonId()));
             personDetailsList.add(updatedPersonDetails);
             return true;
         }
@@ -64,10 +65,10 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
 
     @Override
     public boolean deletePerson(Long personId) {
-      if(personId == null) {
-          return false;
-      }
-      return personDetailsList.removeIf(p -> p.getPersonId().equals(personId));
+        if (personId == null) {
+            return false;
+        }
+        return personDetailsList.removeIf(p -> p.getPersonId().equals(personId));
     }
 
     @Override
@@ -76,7 +77,7 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
     }
 
     public static PersonDetailsRepositoryListBased createInstance() {
-        return new  PersonDetailsRepositoryListBased(new ArrayList<>());
+        return new PersonDetailsRepositoryListBased(new ArrayList<>());
     }
 
     public static PersonDetailsRepositoryListBased createInstanceSingleton() {
