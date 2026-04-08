@@ -40,9 +40,20 @@ public class BakeryApplication {
         PersonDetailsRepository personDetailsRepository6 = context.getBean(PersonDetailsRepository.class);
         System.out.println(personDetailsRepository6);
 
-        boolean addPerson = personDetailsRepository2.addPerson(new PersonDetails(3L, "jan", "kowalski"));
+        //factory
+        boolean addPerson3 = personDetailsRepository5.addPerson(new PersonDetails(15L, "kamil", "łajka"));
+        boolean addPerson4 = personDetailsRepository5.addPerson(new PersonDetails(16L, "michał", "koper"));
+        System.out.println("add person with factory pattern: " + addPerson3);
+        System.out.println("add person with factory pattern: " + addPerson4);
+        List<PersonDetails> factoryListPerson = personDetailsRepository5.findAll();
+        System.out.println("factoryListPerson: " + factoryListPerson);
+        Optional<PersonDetails> findByIdFactory = personDetailsRepository5.findById(15L);
+        System.out.println("findByIdFactory: " + findByIdFactory);
+
+        //builder
+        boolean addPerson1 = personDetailsRepository2.addPerson(new PersonDetails(3L, "jan", "kowalski"));
         boolean addPerson2 = personDetailsRepository2.addPerson(new PersonDetails(4L, "jadwiga", "mazur"));
-        System.out.println("add person " + addPerson);
+        System.out.println("add person " + addPerson1);
         System.out.println("add person " + addPerson2);
         List<PersonDetails> all = personDetailsRepository2.findAll();
         System.out.println(all);
