@@ -40,10 +40,23 @@ public class BakeryApplication {
         PersonDetailsRepository personDetailsRepository6 = context.getBean(PersonDetailsRepository.class);
         System.out.println(personDetailsRepository6);
 
-        personDetailsRepository2.addPerson(5L, "jan", "kowalski");
-        personDetailsRepository2.updatePerson(5L, "nowak");
+        boolean addPerson = personDetailsRepository2.addPerson(new PersonDetails(3L, "jan", "kowalski"));
+        boolean addPerson2 = personDetailsRepository2.addPerson(new PersonDetails(4L, "jadwiga", "mazur"));
+        System.out.println("add person " + addPerson);
         List<PersonDetails> all = personDetailsRepository2.findAll();
         System.out.println(all);
+        boolean updatePerson = personDetailsRepository2.updatePerson(new PersonDetails(3L, "jarek", "kowalski"));
+        System.out.println("update person " + updatePerson);
+        List<PersonDetails> allPerson = personDetailsRepository2.findAll();
+        System.out.println(allPerson);
+        List<PersonDetails> kowalski = personDetailsRepository2.findByLastName("kowalski");
+        System.out.println("findByLastName " + kowalski);
+        Optional<PersonDetails> findById = personDetailsRepository2.findById(4L);
+        System.out.println("findById " + findById);
+        boolean b = personDetailsRepository2.deletePerson(3L);
+        System.out.println("delete person " + b);
+        List<PersonDetails> updateList = personDetailsRepository2.findAll();
+        System.out.println(updateList);
 
         HireDateRepository hireDateRepository = HireDateRepositoryListBased.builder()
                 .hireDateList(new ArrayList<>())
@@ -114,7 +127,7 @@ public class BakeryApplication {
         Optional<Employee> find = employeeRepository.findByPersonId(7L);
         System.out.println(find);
 
-        boolean updateEmp = employeeRepository.updateEmployee(7l, new PersonDetails(8L, "Jan", "Mazurek"), Instant.parse("2023-06-01T08:00:00Z"));
+        boolean updateEmp = employeeRepository.updateEmployee(new PersonDetails(8L, "Jan", "Mazurek"), Instant.parse("2023-06-01T08:00:00Z"));
         System.out.println("Update employee: " + updateEmp);
         System.out.println(employeeRepository.findAll());
 
