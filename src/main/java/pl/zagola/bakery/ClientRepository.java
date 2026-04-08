@@ -11,7 +11,7 @@ public interface ClientRepository {
 
     Optional<Client> findByPersonId(Long personId);
 
-    boolean updateClient(Long personId, PersonDetails updatedPersonDetails, Address updatedAddress);
+    boolean updateClient(PersonDetails updatedPersonDetails, Address updatedAddress);
 
     boolean deleteClient(Long personId);
 
