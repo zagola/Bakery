@@ -53,16 +53,16 @@ public class EmployeeRepositoryListBased implements EmployeeRepository {
     }
 
     @Override
-    public boolean updateEmployee(Long personId, PersonDetails updatedPersonDetails, Instant newHireDate) {
-        if (personId == null || updatedPersonDetails == null || newHireDate == null) {
+    public boolean updateEmployee(PersonDetails updatedPersonDetails, Instant newHireDate) {
+        if (updatedPersonDetails == null || newHireDate == null) {
             return false;
         }
 
         boolean found = employeeList.stream()
-                .anyMatch(e -> e.getPersonDetails().getPersonId().equals(personId));
+                .anyMatch(e -> e.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
 
         if (found) {
-            employeeList.removeIf(e -> e.getPersonDetails().getPersonId().equals(personId));
+            employeeList.removeIf(e -> e.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
             employeeList.add(new Employee(updatedPersonDetails, newHireDate));
             return true;
         }

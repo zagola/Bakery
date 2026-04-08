@@ -12,7 +12,7 @@ public interface EmployeeRepository {
 
     Optional<Employee> findByPersonId(Long personId);
 
-    boolean updateEmployee(Long personId, PersonDetails updatedPersonDetails, Instant newHireDate);
+    boolean updateEmployee(PersonDetails updatedPersonDetails, Instant newHireDate);
 
     boolean deleteEmployee(Long personId);
 }
