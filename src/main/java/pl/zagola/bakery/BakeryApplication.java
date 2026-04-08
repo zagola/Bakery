@@ -80,10 +80,10 @@ public class BakeryApplication {
         hireDateRepository.addHireDate(3L, Instant.parse("2025-10-01T08:00:00Z"));
 
         List<HireDate> allHires = hireDateRepository.findAll();
-        System.out.println(allHires);
+        System.out.println("all hires: " + allHires);
 
         List<HireDate> newHires = hireDateRepository.findNewHires(365);
-        System.out.println(newHires);
+        System.out.println("find new hires: " + newHires);
 
         List<HireDate> longTermEmployees1 = hireDateRepository.findLongTermEmployees(5);
         if (longTermEmployees1.isEmpty()) {
