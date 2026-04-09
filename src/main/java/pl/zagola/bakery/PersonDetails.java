@@ -1,17 +1,20 @@
 package pl.zagola.bakery;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PersonDetails {
-    private final Long personId;
-    private final String firstName;
-    private final String lastName;
-
-    PersonDetails(Long id, String firstName, String lastName) {
-        this.personId = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    private Long personId;
+    private String firstName;
+    private String lastName;
 
     public Long getPersonId() {
         return personId;
