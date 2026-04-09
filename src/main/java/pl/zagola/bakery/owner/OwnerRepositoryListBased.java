@@ -1,9 +1,12 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.owner;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.persondetails.PersonDetails;
+import pl.zagola.bakery.address.Address;
+import pl.zagola.bakery.hiredate.HireDate;
 
 import java.util.ArrayList;
 import java.util.List;

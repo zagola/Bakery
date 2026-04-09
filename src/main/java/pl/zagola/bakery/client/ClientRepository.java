@@ -1,4 +1,7 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.client;
+
+import pl.zagola.bakery.persondetails.PersonDetails;
+import pl.zagola.bakery.address.Address;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.timeprovider;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;

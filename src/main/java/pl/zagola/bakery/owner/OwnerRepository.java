@@ -1,4 +1,8 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.owner;
+
+import pl.zagola.bakery.persondetails.PersonDetails;
+import pl.zagola.bakery.address.Address;
+import pl.zagola.bakery.hiredate.HireDate;
 
 import java.util.List;
 import java.util.Optional;

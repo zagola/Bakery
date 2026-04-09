@@ -1,4 +1,7 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.client;
+
+import pl.zagola.bakery.persondetails.PersonDetails;
+import pl.zagola.bakery.address.Address;
 
 public class Client {
     private final PersonDetails personDetails;
