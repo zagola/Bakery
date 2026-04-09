@@ -1,4 +1,4 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

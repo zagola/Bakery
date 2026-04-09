@@ -1,4 +1,4 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.bakeryproduct;
 
 public class BakeryProduct {
     private String name;
