@@ -32,8 +32,9 @@ public class BakeryApplication {
         PersonDetailsRepository personDetailsRepository4 = PersonDetailsRepositoryListBased.createInstanceSingleton();
 
         //#5 FACTORY
-        PersonDetailsRepository factory = new PersonDetailsRepositoryListBased();
-        PersonDetailsRepository personDetailsRepository5 = factory.createRepository();
+        PersonDetailsRepositoryFactory personDetailsRepositoryFactory = new PersonDetailsRepositoryFactoryImpl();
+        PersonDetailsRepository personDetailRepository5 = personDetailsRepositoryFactory.createPersonDetails();
+
 
         //#6 IoC
         ConfigurableApplicationContext context = SpringApplication.run(BakeryApplication.class, args);
@@ -41,13 +42,14 @@ public class BakeryApplication {
         System.out.println(personDetailsRepository6);
 
         //factory
-        boolean addPerson3 = personDetailsRepository5.addPerson(new PersonDetails(15L, "kamil", "łajka"));
-        boolean addPerson4 = personDetailsRepository5.addPerson(new PersonDetails(16L, "michał", "koper"));
+
+        boolean addPerson3 = personDetailRepository5.addPerson(new PersonDetails(15L, "kamil", "łajka"));
+        boolean addPerson4 = personDetailRepository5.addPerson(new PersonDetails(16L, "michał", "koper"));
         System.out.println("add person with factory pattern: " + addPerson3);
         System.out.println("add person with factory pattern: " + addPerson4);
-        List<PersonDetails> factoryListPerson = personDetailsRepository5.findAll();
+        List<PersonDetails> factoryListPerson = personDetailRepository5.findAll();
         System.out.println("factoryListPerson: " + factoryListPerson);
-        Optional<PersonDetails> findByIdFactory = personDetailsRepository5.findById(15L);
+        Optional<PersonDetails> findByIdFactory = personDetailRepository5.findById(15L);
         System.out.println("findByIdFactory: " + findByIdFactory);
 
         //builder
@@ -199,6 +201,7 @@ public class BakeryApplication {
         boolean deleteOwner = ownerRepository.deleteOwner(1L);
         System.out.println("Delete owner: " + deleteOwner);
         System.out.println("Where is the owner? " + ownerRepository.findById(1L));
+
 
     }
 
