@@ -1,9 +1,10 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.hiredate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.timeprovider.TimeProvider;
 
 import java.time.Instant;
 import java.util.ArrayList;

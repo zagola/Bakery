@@ -1,5 +1,9 @@
 package pl.zagola.bakery;
 
+import pl.zagola.bakery.address.Address;
+import pl.zagola.bakery.employee.Employee;
+import pl.zagola.bakery.order.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 

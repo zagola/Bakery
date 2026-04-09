@@ -1,4 +1,7 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.order;
+
+import pl.zagola.bakery.bakeryproduct.BakeryProduct;
+import pl.zagola.bakery.client.Client;
 
 import java.time.Instant;
 import java.util.List;

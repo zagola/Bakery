@@ -1,4 +1,6 @@
-package pl.zagola.bakery;
+package pl.zagola.bakery.employee;
+
+import pl.zagola.bakery.persondetails.PersonDetails;
 
 import java.time.Instant;
 import java.util.List;
