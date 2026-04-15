@@ -27,8 +27,8 @@ public class ClientRepositoryListBased implements ClientRepository {
         ;
 
         boolean exists = clientList.stream()
-                .anyMatch(c -> c.getPersonDetails().getPersonId()
-                        .equals(personDetails.getPersonId()));
+                .anyMatch(c -> c.getPersonDetails().getId()
+                        .equals(personDetails.getId()));
         if (exists) {
             return false;
         }
@@ -49,7 +49,7 @@ public class ClientRepositoryListBased implements ClientRepository {
         }
 
         return clientList.stream()
-                .filter(c -> c.getPersonDetails().getPersonId().equals(personId))
+                .filter(c -> c.getPersonDetails().getId().equals(personId))
                 .findFirst();
     }
 
@@ -60,10 +60,10 @@ public class ClientRepositoryListBased implements ClientRepository {
         }
 
         boolean found = clientList.stream()
-                .anyMatch(c -> c.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+                .anyMatch(c -> c.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
 
         if (found) {
-            clientList.removeIf(c -> c.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+            clientList.removeIf(c -> c.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
             clientList.add(new Client(updatedPersonDetails, updatedAddress));
             return true;
         }
@@ -75,6 +75,6 @@ public class ClientRepositoryListBased implements ClientRepository {
         if (personId == null) {
             return false;
         }
-        return clientList.removeIf(c -> c.getPersonDetails().getPersonId().equals(personId));
+        return clientList.removeIf(c -> c.getPersonDetails().getId().equals(personId));
     }
 }

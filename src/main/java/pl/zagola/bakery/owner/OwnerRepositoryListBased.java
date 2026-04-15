@@ -27,8 +27,8 @@ public class OwnerRepositoryListBased implements OwnerRepository {
         }
 
         boolean exists = ownerList.stream()
-                .anyMatch(o -> o.getPersonDetails().getPersonId()
-                        .equals(personDetails.getPersonId()));
+                .anyMatch(o -> o.getPersonDetails().getId()
+                        .equals(personDetails.getId()));
         if (exists) {
             return false;
         }
@@ -49,7 +49,7 @@ public class OwnerRepositoryListBased implements OwnerRepository {
         }
 
         return ownerList.stream()
-                .filter(o -> o.getPersonDetails().getPersonId().equals(personId))
+                .filter(o -> o.getPersonDetails().getId().equals(personId))
                 .findFirst();
     }
 
@@ -60,10 +60,10 @@ public class OwnerRepositoryListBased implements OwnerRepository {
         }
 
         boolean found = ownerList.stream()
-                .anyMatch(o -> o.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+                .anyMatch(o -> o.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
 
         if (found) {
-            ownerList.removeIf(o -> o.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+            ownerList.removeIf(o -> o.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
             ownerList.add(new Owner(updatedPersonDetails, updatedAddress, updatedHireDate));
             return true;
         }
@@ -75,6 +75,6 @@ public class OwnerRepositoryListBased implements OwnerRepository {
         if (personId == null) {
             return false;
         }
-        return ownerList.removeIf(o -> o.getPersonDetails().getPersonId().equals(personId));
+        return ownerList.removeIf(o -> o.getPersonDetails().getId().equals(personId));
     }
 }

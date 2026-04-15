@@ -34,7 +34,7 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
             return Optional.empty();
         }
         return personDetailsList.stream()
-                .filter(p -> p.getPersonId().equals(personId))
+                .filter(p -> p.getId().equals(personId))
                 .findFirst();
     }
 
@@ -52,11 +52,11 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
         }
 
         boolean found = personDetailsList.stream()
-                .anyMatch(oldPerson -> oldPerson.getPersonId().equals(updatedPersonDetails.getPersonId()));
+                .anyMatch(oldPerson -> oldPerson.getId().equals(updatedPersonDetails.getId()));
 
         if (found) {
-            personDetailsList.removeIf(oldPerson -> oldPerson.getPersonId()
-                    .equals(updatedPersonDetails.getPersonId()));
+            personDetailsList.removeIf(oldPerson -> oldPerson.getId()
+                    .equals(updatedPersonDetails.getId()));
             personDetailsList.add(updatedPersonDetails);
             return true;
         }
@@ -68,7 +68,7 @@ public class PersonDetailsRepositoryListBased implements PersonDetailsRepository
         if (personId == null) {
             return false;
         }
-        return personDetailsList.removeIf(p -> p.getPersonId().equals(personId));
+        return personDetailsList.removeIf(p -> p.getId().equals(personId));
     }
 
     @Override
