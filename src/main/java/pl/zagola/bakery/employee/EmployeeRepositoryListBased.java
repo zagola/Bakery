@@ -26,8 +26,8 @@ public class EmployeeRepositoryListBased implements EmployeeRepository {
         }
 
         boolean exists = employeeList.stream()
-                .anyMatch(e -> e.getPersonDetails().getPersonId()
-                        .equals(personDetails.getPersonId()));
+                .anyMatch(e -> e.getPersonDetails().getId()
+                        .equals(personDetails.getId()));
 
         if (exists) {
             return false;
@@ -49,7 +49,7 @@ public class EmployeeRepositoryListBased implements EmployeeRepository {
         }
 
         return employeeList.stream()
-                .filter(e -> e.getPersonDetails().getPersonId().equals(personId))
+                .filter(e -> e.getPersonDetails().getId().equals(personId))
                 .findFirst();
     }
 
@@ -60,10 +60,10 @@ public class EmployeeRepositoryListBased implements EmployeeRepository {
         }
 
         boolean found = employeeList.stream()
-                .anyMatch(e -> e.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+                .anyMatch(e -> e.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
 
         if (found) {
-            employeeList.removeIf(e -> e.getPersonDetails().getPersonId().equals(updatedPersonDetails.getPersonId()));
+            employeeList.removeIf(e -> e.getPersonDetails().getId().equals(updatedPersonDetails.getId()));
             employeeList.add(new Employee(updatedPersonDetails, newHireDate));
             return true;
         }
@@ -76,6 +76,6 @@ public class EmployeeRepositoryListBased implements EmployeeRepository {
             return false;
         }
 
-        return employeeList.removeIf(e -> e.getPersonDetails().getPersonId().equals(personId));
+        return employeeList.removeIf(e -> e.getPersonDetails().getId().equals(personId));
     }
 }
