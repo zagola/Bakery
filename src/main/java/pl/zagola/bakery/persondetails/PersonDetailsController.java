@@ -10,21 +10,21 @@ import java.util.List;
 
 @RestController
 public class PersonDetailsController {
-    private final PersonDetailsRepository personDetailsRepository;
+    private final PersonDetailsService personDetailsService;
 
-    public PersonDetailsController(PersonDetailsRepository personDetailsRepository) {
-        this.personDetailsRepository = personDetailsRepository;
+    public PersonDetailsController(PersonDetailsService personDetailsService) {
+        this.personDetailsService = personDetailsService;
     }
 
     @GetMapping(path = "/persondetails")
     public ResponseEntity<List<PersonDetails>> getPersonDetails() {
-        List<PersonDetails> personDetails = personDetailsRepository.findAll();
+        List<PersonDetails> personDetails = personDetailsService.getPersonDetails();
         return ResponseEntity.ok(personDetails);
     }
 
     @PostMapping(path = "/persondetails")
     public ResponseEntity<PersonDetails> createPersonDetails(@RequestBody PersonDetails personDetails) {
-        boolean saved = personDetailsRepository.addPerson(personDetails);
+        boolean saved = personDetailsService.addPersonDetails(personDetails);
         if (saved) {
             return ResponseEntity.ok(personDetails);
         }
