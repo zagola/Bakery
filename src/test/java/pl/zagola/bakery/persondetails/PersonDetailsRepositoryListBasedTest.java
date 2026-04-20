@@ -11,13 +11,22 @@ import java.util.Optional;
 class PersonDetailsRepositoryListBasedTest {
     private PersonDetailsRepository repository;
 
+    private static final Long id = 1L;
+    private static final String firstName = "Jan";
+    private static final String lastName = "Kowalski";
+
+    private static final Long nonExistentId = 333L;
+    private static final String nonExistentFirstName = "Robin";
+    private static final String nonExistentLastName = "Pigwa";
+
+
     @BeforeEach
     public void setUp() {
         List<PersonDetails> personDetails = new ArrayList<>();
         personDetails.add(PersonDetails.builder()
-                .firstName("Jan")
-                .lastName("Kowalski")
-                .id(2L)
+                .firstName(firstName)
+                .lastName(lastName)
+                .id(id)
                 .build()
         );
 
@@ -27,10 +36,14 @@ class PersonDetailsRepositoryListBasedTest {
     @Test
     public void shouldAddPerson() {
         //given
+        Long newId = 2L;
+        String newFirstName = "Kaja";
+        String newLastName = "Poniedziałek";
+
         PersonDetails newPerson = PersonDetails.builder()
-                .id(10L)
-                .firstName("Kaja")
-                .lastName("Poniedziałek")
+                .id(newId)
+                .firstName(newFirstName)
+                .lastName(newLastName)
                 .build();
 
         //when
@@ -40,73 +53,57 @@ class PersonDetailsRepositoryListBasedTest {
         Assertions.assertTrue(actual);
         Assertions.assertEquals(2, repository.findAll().size());
 
+        Optional<PersonDetails> existingPerson = repository.findById(id);
+        Assertions.assertTrue(existingPerson.isPresent());
+        PersonDetails existingPersonDetails = existingPerson.get();
+
+        Assertions.assertAll("existing person",
+                () -> Assertions.assertEquals(firstName, existingPersonDetails.getFirstName()),
+                () -> Assertions.assertEquals(lastName, existingPersonDetails.getLastName())
+        );
+
+        Optional<PersonDetails> newAddedPerson = repository.findById(newId);
+        Assertions.assertTrue(newAddedPerson.isPresent());
+        PersonDetails newAddedPersonDetails = newAddedPerson.get();
+
+        Assertions.assertAll("added person",
+                () -> Assertions.assertEquals(newFirstName, newAddedPersonDetails.getFirstName()),
+                () -> Assertions.assertEquals(newLastName, newAddedPersonDetails.getLastName())
+        );
+
     }
 
     @Test
     public void shouldReturnAllPersonalDetails() {
         //given
-
         //when
         List<PersonDetails> actual = repository.findAll();
 
         //then
         Assertions.assertEquals(1, actual.size());
-        Assertions.assertEquals(2L, actual.get(0).getId());
-        Assertions.assertEquals("Jan", actual.get(0).getFirstName());
-        Assertions.assertEquals("Kowalski", actual.get(0).getLastName());
+        Assertions.assertEquals(id, actual.getFirst().getId());
+        Assertions.assertEquals(firstName, actual.getFirst().getFirstName());
+        Assertions.assertEquals(lastName, actual.getFirst().getLastName());
 
     }
 
     @Test
     public void shouldReturnPersonWhenIdExists() {
         //given
-        Long id = 2L;
-
         //when
         Optional<PersonDetails> actual = repository.findById(id);
 
         //then
         Assertions.assertTrue(actual.isPresent());
-        Assertions.assertEquals(2L, actual.get().getId());
+        Assertions.assertEquals(id, actual.get().getId());
     }
 
-    @Test
-    public void shouldReturnPersonWhenIdDoesNotExist() {
-        //given
-        Long id = 333L;
 
+    @Test
+    public void shouldReturnEmptyOptionalWhenIdDoesNotExist() {
+        //given
         //when
-        Optional<PersonDetails> actual = repository.findById(id);
-
-        //then
-        Assertions.assertFalse(actual.isPresent());
-
-    }
-
-    @Test
-    public void shouldReturnPersonWithGivenLastName() {
-        //given
-        repository.addPerson(PersonDetails.builder()
-                .id(5L)
-                .firstName("Grzegorz")
-                .lastName("Nowak")
-                .build()
-        );
-
-        // when
-        List<PersonDetails> actual = repository.findByLastName("Nowak");
-
-        //then
-        Assertions.assertEquals(1, actual.size());
-        Assertions.assertEquals("Nowak", actual.get(0).getLastName());
-    }
-
-    @Test
-    public void shouldReturnEmptyListWhenLastNameNotFound() {
-        //given
-
-        //when
-        List<PersonDetails> actual = repository.findByLastName("Pigwa");
+        Optional<PersonDetails> actual = repository.findById(nonExistentId);
 
         //then
         Assertions.assertTrue(actual.isEmpty());
@@ -114,32 +111,59 @@ class PersonDetailsRepositoryListBasedTest {
     }
 
     @Test
-    public void shouldReturnUpdatedPerson() {
+    public void shouldReturnPersonWithGivenLastName() {
         //given
+        //when
+        List<PersonDetails> actual = repository.findByLastName(lastName);
+
+        //then
+        Assertions.assertEquals(1, actual.size());
+        Assertions.assertEquals(lastName, actual.getFirst().getLastName());
+    }
+
+    @Test
+    public void shouldReturnEmptyListWhenLastNameDoesNotExist() {
+        //given
+        //when
+        List<PersonDetails> actual = repository.findByLastName(nonExistentLastName);
+
+        //then
+        Assertions.assertTrue(actual.isEmpty());
+
+    }
+
+    @Test
+    public void shouldUpdatePersonWhenExists() {
+        //given
+        Long updatedId = 1L;
+        String updatedFirstName = "Janina";
+        String updatedLastName = "Piątek";
 
         //when
         boolean actual = repository.updatePerson(PersonDetails.builder()
-                .id(2L)
-                .firstName("Janina")
-                .lastName("Piątek")
+                .id(updatedId)
+                .firstName(updatedFirstName)
+                .lastName(updatedLastName)
                 .build()
         );
 
         //then
         Assertions.assertTrue(actual);
-        Assertions.assertEquals(2L, repository.findAll().get(0).getId());
-        Assertions.assertEquals("Janina", repository.findAll().get(0).getFirstName());
-        Assertions.assertEquals("Piątek", repository.findAll().get(0).getLastName());
+        PersonDetails person = repository.findAll().getFirst();
+        Assertions.assertEquals(updatedId, person.getId());
+        Assertions.assertEquals(updatedFirstName, person.getFirstName());
+        Assertions.assertEquals(updatedLastName, person.getLastName());
 
     }
 
+
     @Test
-    public void shouldNotUpdateWhenPersonDoesNotExist() {
+    public void shouldNotUpdateNonExistentPerson() {
         //given
         PersonDetails update = PersonDetails.builder()
-                .id(333L)
-                .firstName("Janina")
-                .lastName("Piątek")
+                .id(nonExistentId)
+                .firstName(nonExistentFirstName)
+                .lastName(nonExistentLastName)
                 .build();
 
         //when
@@ -151,11 +175,10 @@ class PersonDetailsRepositoryListBasedTest {
     }
 
     @Test
-    public void shouldDeletePerson() {
+    public void shouldDeletePersonWhenExists() {
         //given
-
         //when
-        boolean actual = repository.deletePerson(2L);
+        boolean actual = repository.deletePerson(id);
 
         //then
         Assertions.assertTrue(actual);
@@ -165,9 +188,8 @@ class PersonDetailsRepositoryListBasedTest {
     @Test
     public void shouldReturnFalseWhenDeletingPersonDoesNotExist() {
         //given
-
         //when
-        boolean actual = repository.deletePerson(9L);
+        boolean actual = repository.deletePerson(nonExistentId);
 
         //then
         Assertions.assertFalse(actual);
