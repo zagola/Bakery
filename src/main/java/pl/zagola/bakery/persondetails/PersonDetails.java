@@ -16,18 +16,6 @@ public class PersonDetails {
     private String firstName;
     private String lastName;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     @Override
     public String toString() {
         return firstName + " " + lastName + " " + id;
@@ -43,5 +31,4 @@ public class PersonDetails {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
 }

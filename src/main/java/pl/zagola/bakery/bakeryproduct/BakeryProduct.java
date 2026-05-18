@@ -1,5 +1,14 @@
 package pl.zagola.bakery.bakeryproduct;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BakeryProduct {
     private String name;
     private double price;
@@ -21,8 +30,3 @@ public class BakeryProduct {
     }
 
 }
-
-//  private String customizations;
-//    private int stockQuantity;
-//    private String wholesalerOrder;
-//    private String merchandising;
