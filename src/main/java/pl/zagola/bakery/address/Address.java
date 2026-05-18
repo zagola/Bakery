@@ -1,29 +1,20 @@
 package pl.zagola.bakery.address;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Address {
-    private final Long personId;
-    private final double latitude;
-    private final double longitude;
-
-    public Address(Long personId, double latitude, double longitude) {
-        this.personId = personId;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
+    private Long personId;
+    private double latitude;
+    private double longitude;
 
     @Override
     public String toString() {

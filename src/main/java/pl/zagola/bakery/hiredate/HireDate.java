@@ -1,24 +1,20 @@
 package pl.zagola.bakery.hiredate;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.Instant;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class HireDate {
-    private final Long personId;
-    private final Instant hireDate;
-
-    public HireDate(Long personId, Instant hireDate) {
-        this.personId = personId;
-        this.hireDate = hireDate;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public Instant getHireDate() {
-        return hireDate;
-    }
+    private Long personId;
+    private Instant hireDate;
 
     @Override
     public String toString() {
