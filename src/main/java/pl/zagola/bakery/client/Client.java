@@ -1,25 +1,20 @@
 package pl.zagola.bakery.client;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.zagola.bakery.persondetails.PersonDetails;
 import pl.zagola.bakery.address.Address;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Client {
-    private final PersonDetails personDetails;
-    private final Address address;
+    private PersonDetails personDetails;
+    private Address address;
 
-
-    public Client(PersonDetails personDetails, Address address) {
-        this.personDetails = personDetails;
-        this.address = address;
-    }
-
-    public PersonDetails getPersonDetails() {
-        return personDetails;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
 
     @Override
     public String toString() {
