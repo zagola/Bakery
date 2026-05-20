@@ -23,8 +23,10 @@ create table person_role
 create table address
 (
     address_id serial primary key,
+    person_id  int,
     latitude   double precision,
-    longitude  double precision
+    longitude  double precision,
+    foreign key (person_id) references person_details (person_id) on delete cascade
 );
 
 create table hire_date
@@ -76,7 +78,9 @@ create table product
 (
     product_id serial primary key,
     name       varchar,
-    price      double precision
+    price      double precision,
+    customization  varchar,
+    stock_quantity int
 );
 
 create table orders
