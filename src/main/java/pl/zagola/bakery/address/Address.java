@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 public class Address {
     private Long personId;
     private double latitude;
