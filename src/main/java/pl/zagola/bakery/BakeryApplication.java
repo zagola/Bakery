@@ -10,6 +10,7 @@ import pl.zagola.bakery.address.AddressRepositoryListBased;
 import pl.zagola.bakery.client.Client;
 import pl.zagola.bakery.client.ClientRepository;
 import pl.zagola.bakery.client.ClientRepositoryListBased;
+import pl.zagola.bakery.client.repositories.ClientDataRepository;
 import pl.zagola.bakery.employee.Employee;
 import pl.zagola.bakery.employee.EmployeeRepository;
 import pl.zagola.bakery.employee.EmployeeRepositoryListBased;
@@ -26,10 +27,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class BakeryApplication {
 
     static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(BakeryApplication.class, args);
+        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+        for(String bean : beanDefinitionNames){
+            System.out.println(bean);
+        }
+
+
+
+        ClientDataRepository clientDataRepository = context.getBean(ClientDataRepository.class);
+        System.out.println(clientDataRepository);
+
+
+
+
+    }
+
+    private static void methodsTests(String[] args) {
         //SpringApplication.run(BakeryApplication.class, args);
 
         //methods of creating objects
@@ -217,8 +235,6 @@ public class BakeryApplication {
         boolean deleteOwner = ownerRepository.deleteOwner(1L);
         System.out.println("Delete owner: " + deleteOwner);
         System.out.println("Where is the owner? " + ownerRepository.findById(1L));
-
-
     }
 
 }
