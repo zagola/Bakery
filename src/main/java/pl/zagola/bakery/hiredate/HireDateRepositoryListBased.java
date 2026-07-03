@@ -1,7 +1,6 @@
 package pl.zagola.bakery.hiredate;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.zagola.bakery.timeprovider.TimeProvider;
@@ -13,7 +12,6 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Repository
 public class HireDateRepositoryListBased implements HireDateRepository {
 
@@ -78,5 +76,4 @@ public class HireDateRepositoryListBased implements HireDateRepository {
                 })
                 .orElse(false);
     }
-
 }

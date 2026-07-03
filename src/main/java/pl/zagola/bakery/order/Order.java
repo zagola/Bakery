@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.zagola.bakery.bakeryproduct.BakeryProduct;
+import pl.zagola.bakery.orderitem.OrderItem;
 import pl.zagola.bakery.client.Client;
 
 import java.time.Instant;
@@ -16,8 +16,7 @@ import java.util.List;
 @Builder
 public class Order {
     private Client client;
-    private List<BakeryProduct> products;
+    private List<OrderItem> orderItems;
     private double totalPrice;
     private Instant orderDate;
-
 }

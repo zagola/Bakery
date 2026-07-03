@@ -22,10 +22,4 @@ public class Bakery {
     private List<Employee> employees = new ArrayList<>();
     private List<Order> orderHistory = new ArrayList<>();
     private double pathStrategy;
-
-    public Bakery(String name, Address address, Employee owner) {
-        this.name = name;
-        this.address = address;
-        this.owner = owner;
-    }
 }
