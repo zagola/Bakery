@@ -1,7 +1,6 @@
 package pl.zagola.bakery.employee;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.zagola.bakery.persondetails.PersonDetails;
@@ -13,7 +12,6 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Repository
 public class EmployeeRepositoryListBased implements EmployeeRepository {
 
