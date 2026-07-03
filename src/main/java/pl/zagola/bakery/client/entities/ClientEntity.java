@@ -2,6 +2,7 @@ package pl.zagola.bakery.client.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.zagola.bakery.address.entities.AddressEntity;
 import pl.zagola.bakery.persondetails.entities.PersonDetailsEntity;
 
 @Entity
@@ -17,10 +18,11 @@ public class ClientEntity {
     @Column(name = "client_id")
     private Long clientId;
 
-    //@Column(name = "person_id")
-    @OneToOne(mappedBy = "personId")
-    private PersonDetailsEntity personId;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private PersonDetailsEntity person;
 
-    @Column(name = "address_id")
-    private Long  addressId;
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private AddressEntity address;
 }
