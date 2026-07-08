@@ -19,7 +19,9 @@ public class Bakery {
     private String name;
     private Address address;
     private Employee owner;
+    @Builder.Default
     private List<Employee> employees = new ArrayList<>();
+    @Builder.Default
     private List<Order> orderHistory = new ArrayList<>();
     private double pathStrategy;
 }
