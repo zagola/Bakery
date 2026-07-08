@@ -1,13 +1,14 @@
 package pl.zagola.bakery.address;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
     private Long personId;
     private double latitude;
@@ -18,16 +19,4 @@ public class Address {
         return String.format("Address{personId=%d, lat=%.4f, lon=%.4f}",
                 personId, latitude, longitude);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Address address)) return false;
-        return Objects.equals(personId, address.personId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(personId);
-    }
-
 }

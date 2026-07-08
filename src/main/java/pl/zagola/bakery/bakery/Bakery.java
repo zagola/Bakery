@@ -28,5 +28,4 @@ public class Bakery {
         this.address = address;
         this.owner = owner;
     }
-
 }

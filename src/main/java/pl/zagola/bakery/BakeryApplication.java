@@ -2,7 +2,6 @@ package pl.zagola.bakery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.zagola.bakery.address.Address;
 import pl.zagola.bakery.address.AddressRepository;
@@ -37,13 +36,8 @@ public class BakeryApplication {
             System.out.println(bean);
         }
 
-
-
         ClientDataRepository clientDataRepository = context.getBean(ClientDataRepository.class);
         System.out.println(clientDataRepository);
-
-
-
 
     }
 
@@ -191,9 +185,9 @@ public class BakeryApplication {
                 .clientList(new ArrayList<>())
                 .build();
 
-        boolean addCli1 = clientRepository.addClient(new PersonDetails(10L, "Anna", "Zawadzka"), new Address(10L, 52.0, 18.0));
+        boolean addCli1 = clientRepository.addClient(new PersonDetails(10L, "Anna", "Zawadzka"), new Address());
         System.out.println("Add new client: " + addCli1);
-        boolean addCli2 = clientRepository.addClient(new PersonDetails(11L, "Piotr", "Kowalski"), new Address(11L, 51.0, 21.0));
+        boolean addCli2 = clientRepository.addClient(new PersonDetails(11L, "Piotr", "Kowalski"), new Address());
         System.out.println("Add new client: " + addCli2);
         List<Client> allClients = clientRepository.findAll();
         System.out.println(allClients);
@@ -203,7 +197,7 @@ public class BakeryApplication {
         Optional<Client> findCli2 = clientRepository.findByPersonId(2L);
         System.out.println(findCli2);
 
-        boolean updateCli = clientRepository.updateClient(new PersonDetails(10L, "Anna", "Kowalska"), new Address(10L, 52.0, 18.0));
+        boolean updateCli = clientRepository.updateClient(new PersonDetails(10L, "Anna", "Kowalska"), new Address());
         System.out.println("Update client: " + updateCli);
         List<Client> findAll = clientRepository.findAll();
         System.out.println(findAll);
@@ -219,7 +213,7 @@ public class BakeryApplication {
                 .ownerList(new ArrayList<>())
                 .build();
 
-        boolean adDOwner = ownerRepository.addOwner(new PersonDetails(1L, "Jan", "Właściciel"), new Address(1L, 52.0, 21.0), new HireDate(1L, Instant.parse("2020-06-01T08:00:00Z")));
+        boolean adDOwner = ownerRepository.addOwner(new PersonDetails(1L, "Jan", "Właściciel"), new Address(), new HireDate(1L, Instant.parse("2020-06-01T08:00:00Z")));
         System.out.println("Add owner: " + adDOwner);
 
         List<Owner> owner = ownerRepository.findOwner();
@@ -228,7 +222,7 @@ public class BakeryApplication {
         Optional<Owner> byId = ownerRepository.findById(1L);
         System.out.println(byId);
 
-        boolean newOwner = ownerRepository.updateOwner(new PersonDetails(1L, "Tomasz", "NowyWłaściciel"), new Address(1L, 52.0, 21.0), new HireDate(1L, Instant.parse("2026-04-01T08:00:00Z")));
+        boolean newOwner = ownerRepository.updateOwner(new PersonDetails(1L, "Tomasz", "NowyWłaściciel"), new Address(), new HireDate(1L, Instant.parse("2026-04-01T08:00:00Z")));
         System.out.println("Update owner: " + newOwner);
         System.out.println("Update owner: " + ownerRepository.findById(1L));
 
