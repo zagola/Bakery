@@ -28,6 +28,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     implementation 'org.postgresql:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
 }
 
 application {
