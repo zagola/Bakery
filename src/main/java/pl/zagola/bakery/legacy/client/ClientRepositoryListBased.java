@@ -1,8 +1,8 @@
-package pl.zagola.bakery.client;
+package pl.zagola.bakery.legacy.client;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.client.Client;
 import pl.zagola.bakery.persondetails.PersonDetails;
 import pl.zagola.bakery.address.Address;
 
@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Repository
 public class ClientRepositoryListBased implements ClientRepository {
 
     private List<Client> clientList = new ArrayList<>();

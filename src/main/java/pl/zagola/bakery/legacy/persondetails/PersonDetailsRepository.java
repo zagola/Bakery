@@ -1,4 +1,6 @@
-package pl.zagola.bakery.persondetails;
+package pl.zagola.bakery.legacy.persondetails;
+
+import pl.zagola.bakery.persondetails.PersonDetails;
 
 import java.util.List;
 import java.util.Optional;

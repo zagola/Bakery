@@ -1,5 +1,6 @@
-package pl.zagola.bakery.client;
+package pl.zagola.bakery.legacy.client;
 
+import pl.zagola.bakery.client.Client;
 import pl.zagola.bakery.persondetails.PersonDetails;
 import pl.zagola.bakery.address.Address;
 

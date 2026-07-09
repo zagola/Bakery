@@ -1,8 +1,8 @@
-package pl.zagola.bakery.hiredate;
+package pl.zagola.bakery.legacy.hiredate;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.hiredate.HireDate;
 import pl.zagola.bakery.timeprovider.TimeProvider;
 
 import java.time.Instant;
@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Repository
 public class HireDateRepositoryListBased implements HireDateRepository {
 
     private List<HireDate> hireDateList = new ArrayList<>();

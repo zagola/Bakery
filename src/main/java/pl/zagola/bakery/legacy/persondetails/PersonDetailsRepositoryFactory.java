@@ -1,4 +1,4 @@
-package pl.zagola.bakery.persondetails;
+package pl.zagola.bakery.legacy.persondetails;
 
 public interface PersonDetailsRepositoryFactory {
     PersonDetailsRepository createPersonDetails();

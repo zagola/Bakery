@@ -1,4 +1,6 @@
-package pl.zagola.bakery.address;
+package pl.zagola.bakery.legacy.address;
+
+import pl.zagola.bakery.address.Address;
 
 import java.util.List;
 

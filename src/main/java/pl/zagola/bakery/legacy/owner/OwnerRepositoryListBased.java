@@ -1,8 +1,8 @@
-package pl.zagola.bakery.owner;
+package pl.zagola.bakery.legacy.owner;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.owner.Owner;
 import pl.zagola.bakery.persondetails.PersonDetails;
 import pl.zagola.bakery.address.Address;
 import pl.zagola.bakery.hiredate.HireDate;
@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Repository
 public class OwnerRepositoryListBased implements OwnerRepository {
 
     private List<Owner> ownerList = new ArrayList<>();

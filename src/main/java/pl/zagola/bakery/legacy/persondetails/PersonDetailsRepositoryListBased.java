@@ -1,8 +1,8 @@
-package pl.zagola.bakery.persondetails;
+package pl.zagola.bakery.legacy.persondetails;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.persondetails.PersonDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Repository
 public class PersonDetailsRepositoryListBased implements PersonDetailsRepository {
     private List<PersonDetails> personDetailsList = new ArrayList<>();
     private static PersonDetailsRepositoryListBased INSTANCE = null;

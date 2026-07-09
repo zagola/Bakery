@@ -1,11 +1,13 @@
-package pl.zagola.bakery.product;
+package pl.zagola.bakery.legacy.product;
+
+import pl.zagola.bakery.product.Product;
 
 import java.util.List;
 
-public class ProductListBased implements ProductRepository {
+public class ProductRepositoryListBased implements ProductRepository {
     private List<Product> products;
 
-    public ProductListBased(List<Product> products) {
+    public ProductRepositoryListBased(List<Product> products) {
         this.products = products;
     }
 

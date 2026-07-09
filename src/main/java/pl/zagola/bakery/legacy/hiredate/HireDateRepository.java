@@ -1,4 +1,6 @@
-package pl.zagola.bakery.hiredate;
+package pl.zagola.bakery.legacy.hiredate;
+
+import pl.zagola.bakery.hiredate.HireDate;
 
 import java.time.Instant;
 import java.util.List;

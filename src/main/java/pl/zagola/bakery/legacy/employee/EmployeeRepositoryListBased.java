@@ -1,8 +1,8 @@
-package pl.zagola.bakery.employee;
+package pl.zagola.bakery.legacy.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
+import pl.zagola.bakery.employee.Employee;
 import pl.zagola.bakery.persondetails.PersonDetails;
 
 import java.time.Instant;
@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Repository
 public class EmployeeRepositoryListBased implements EmployeeRepository {
 
     private List<Employee> employeeList = new ArrayList<>();

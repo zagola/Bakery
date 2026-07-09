@@ -1,5 +1,7 @@
 
-package pl.zagola.bakery.product;
+package pl.zagola.bakery.legacy.product;
+
+import pl.zagola.bakery.product.Product;
 
 import java.util.List;
 
