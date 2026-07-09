@@ -1,8 +1,9 @@
-package pl.zagola.bakery.persondetails;
+package pl.zagola.bakery.legacy.persondetails;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.zagola.bakery.persondetails.PersonDetails;
 
 import java.util.ArrayList;
 import java.util.List;
