@@ -22,10 +22,13 @@ product inventory, and order history.
 
 ## Tech stack
 
-- Java
-- Spring Boot
+- Java 25
+- Spring Boot 4.0.3
 - Gradle
+- Spring Data JPA
 - PostgreSQL (with DBViewer)
+- Lombok
+- JUnit 5
 - Docker
 - [springboot4-dotenv](https://github.com/paulschwarz/spring-dotenv) — loads environment variables from `.env`
 - Graph algorithms (for shortest-path delivery routing)
