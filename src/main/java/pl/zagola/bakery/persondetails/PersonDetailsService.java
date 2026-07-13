@@ -2,6 +2,7 @@ package pl.zagola.bakery.persondetails;
 
 import org.springframework.stereotype.Service;
 import pl.zagola.bakery.persondetails.entities.PersonDetailsEntity;
+import pl.zagola.bakery.persondetails.repositories.PersonDetailsJpaRepository;
 
 import java.util.List;
 

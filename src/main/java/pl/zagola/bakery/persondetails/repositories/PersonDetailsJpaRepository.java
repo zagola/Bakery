@@ -1,4 +1,4 @@
-package pl.zagola.bakery.persondetails;
+package pl.zagola.bakery.persondetails.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

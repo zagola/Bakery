@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.zagola.bakery.client.entities.ClientEntity;
 
 @Repository
-public interface ClientDataRepository extends JpaRepository<ClientEntity, Long> {
+public interface ClientJpaRepository extends JpaRepository<ClientEntity, Long> {
 }
