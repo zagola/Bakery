@@ -3,7 +3,7 @@ package pl.zagola.bakery.legacy.hiredate;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import pl.zagola.bakery.hiredate.HireDate;
-import pl.zagola.bakery.timeprovider.TimeProvider;
+import pl.zagola.bakery.legacy.timeprovider.TimeProvider;
 
 import java.time.Instant;
 import java.util.ArrayList;

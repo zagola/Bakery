@@ -1,4 +1,4 @@
-package pl.zagola.bakery.owner;
+package pl.zagola.bakery.legacy.owner;
 
 import pl.zagola.bakery.persondetails.PersonDetails;
 import pl.zagola.bakery.address.Address;
